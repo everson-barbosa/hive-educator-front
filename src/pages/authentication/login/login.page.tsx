@@ -3,18 +3,24 @@ import { signInSchema, SignInSchema } from "./schemas/sign-in.schema"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { Input } from "../../../components/ui/input/input.component"
 import { Label } from "../../../components/ui/label/label.component"
-import { signInService } from "../../../services/authentication/sign-in/sign-in.service"
+import { useAuthentication } from "../../../contexts/authentication"
 
 export function LoginPage() {
-  const { register, handleSubmit } = useForm<SignInSchema>({
-    resolver: zodResolver(signInSchema)
+  const { register, handleSubmit, formState: { isSubmitting } } = useForm<SignInSchema>({
+    resolver: zodResolver(signInSchema),
+    defaultValues: {
+      email: 'everson.silva2706@gmail.com',
+      password: '123'
+    }
   })
 
+  const { signIn } = useAuthentication()
+  
   const handleSubmitForm = async ({ email, password }: SignInSchema) => {
     try {
-      await signInService({ email, password }) 
+      signIn.withEmailAndPassword({ email, password }) 
     } catch (error) {
-      console.error('Error on try to sign-in', error)
+      console.log(error)
     }
   }
   
@@ -28,7 +34,7 @@ export function LoginPage() {
         <Label htmlFor="password">Password</Label>
         <Input {...register('password')} id="password" type="password" required />
       </div>
-      <button type="submit">Login</button>
+      <button type="submit" disabled={isSubmitting}>Login</button>
     </form>
   )
 }

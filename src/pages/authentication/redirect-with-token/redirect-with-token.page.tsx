@@ -13,9 +13,9 @@ export function RedirectWithToken() {
     const isTokenExpired = token ? checkIfTokenIsExpired(token) : false
     
     if (isTokenExpired) {
-      console.log('Redirect to login')
+      // console.log('Redirect to login')
     } else {
-      console.log('Redirect to logged page')
+      // console.log('Redirect to logged page')
     }
   }, [location.search])
 

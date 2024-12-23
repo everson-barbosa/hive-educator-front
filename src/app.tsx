@@ -1,18 +1,19 @@
-import { BrowserRouter } from "react-router-dom"
-import { Router } from "./routes/router"
+
+import { BrowserRouter } from "react-router-dom";
 import { ThemeProvider } from "./contexts/theme"
 import { AuthenticationProvider } from "./contexts/authentication"
+import { Router } from "./routes/router";
 
 function App() {
 
   return (
-    <ThemeProvider defaultTheme="dark">
-      <AuthenticationProvider>
-        <BrowserRouter>
+    <BrowserRouter>
+      <ThemeProvider defaultTheme="dark">
+        <AuthenticationProvider>
           <Router />
-        </BrowserRouter>
-      </AuthenticationProvider>
-    </ThemeProvider>
+        </AuthenticationProvider>
+      </ThemeProvider>
+    </BrowserRouter>
   )
 }
 

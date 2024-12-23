@@ -1,10 +1,10 @@
 import { useAuthentication } from "../../contexts/authentication";
 import { AuthGuard } from "../../utils/guards/auth-guard";
 import { useEffect } from "react";
-import { Outlet } from "react-router-dom";
+import { Link, Outlet } from "react-router-dom";
 
 export function AdminLayout() {
-  const { isAuthenticated } = useAuthentication()
+  const { isAuthenticated, signOut } = useAuthentication()
 
   useEffect(() => {
     if (!isAuthenticated) {
@@ -15,11 +15,23 @@ export function AdminLayout() {
   return (
     <AuthGuard>
       <header>
-        Header
+        <Link to="/">
+          Home
+        </Link>
+
+        <div>
+          <button type="button" onClick={signOut}>Logout</button>
+        </div>
       </header>
 
       <aside>
-        Aside
+        <ul>
+          <li>
+            <Link to='/exam-applications'>
+              Exams
+            </Link>
+          </li>
+        </ul>
       </aside>
 
       <main>

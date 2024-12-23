@@ -1,5 +1,5 @@
-import { SIGN_IN_TOKEN_LOCALSTORE_KEY } from "../../../config/localstorage/localstorage.config";
+import { SIGN_IN_TOKEN_STORAGE_KEY } from "../../../config/storage/storage.config";
 
 export function getStoragedToken() {
-  return localStorage.getItem(SIGN_IN_TOKEN_LOCALSTORE_KEY)
+  return sessionStorage.getItem(SIGN_IN_TOKEN_STORAGE_KEY)
 }

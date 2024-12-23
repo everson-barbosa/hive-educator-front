@@ -6,6 +6,7 @@ export function checkIfTokenIsExpired(token: string): boolean {
   if (!expiration) {
     return true
   }
+  
 
-  return Date.now() > expiration
+  return Date.now() < expiration
 }

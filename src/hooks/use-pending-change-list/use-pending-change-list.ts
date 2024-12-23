@@ -1,16 +1,16 @@
 import { renderHook, act } from '@testing-library/react';
-import { useChangeSet } from './';
+import { usePendingChangeList } from '.';
 
-describe('useChangeSet', () => {
+describe('hooks: usePendingChangeList', () => {
   it('should be able initialize with empty sets', () => {
-    const { result } = renderHook(() => useChangeSet());
+    const { result } = renderHook(() => usePendingChangeList());
 
     expect(result.current.toAdd.size).toBe(0);
     expect(result.current.toRemove.size).toBe(0);
   });
 
   it('should be able add change to add values and to remove values on update', () => {
-    const { result } = renderHook(() => useChangeSet<number>());
+    const { result } = renderHook(() => usePendingChangeList<number>());
 
     act(() => {
       result.current.update({
@@ -25,7 +25,7 @@ describe('useChangeSet', () => {
 
   it('should be able compare complex values, example: objects', () => {
     interface Person { id: number, name: string }
-    const { result } = renderHook(() => useChangeSet<Person>());
+    const { result } = renderHook(() => usePendingChangeList<Person>());
 
     act(() => {
       result.current.update({
@@ -48,7 +48,7 @@ describe('useChangeSet', () => {
   })
 
   it('should be able reset values', () => {
-    const { result } = renderHook(() => useChangeSet<number>());
+    const { result } = renderHook(() => usePendingChangeList<number>());
 
     act(() => {
       result.current.update({

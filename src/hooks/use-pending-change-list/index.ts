@@ -6,14 +6,14 @@ interface UpdateProps<T> {
   readonly compareFn?: (a: T, b: T) => boolean
 }
 
-interface ChangeSet<T> {
+interface PendingChangeList<T> {
   readonly toAdd: Set<T>
   readonly toRemove: Set<T>
   readonly update: (props: UpdateProps<T>) => void
   readonly reset: () => void
 }
 
-export function useChangeSet<T = unknown>(): ChangeSet<T> {
+export function usePendingChangeList<T = unknown>(): PendingChangeList<T> {
   const [toAdd, setToAdd] = useState<Set<T>>(new Set())
   const [toRemove, setToRemove] = useState<Set<T>>(new Set())
 
