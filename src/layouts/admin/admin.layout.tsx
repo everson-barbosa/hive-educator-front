@@ -1,10 +1,13 @@
+import { SidebarInset, SidebarProvider } from "../../components/ui/sidebar/sidebar.component";
 import { useAuthentication } from "../../contexts/authentication";
 import { AuthGuard } from "../../utils/guards/auth-guard";
 import { useEffect } from "react";
-import { Link, Outlet } from "react-router-dom";
+import { Outlet } from "react-router-dom";
+import { AsideMenu } from "./components/aside-menu/aside-menu.component";
+import { Header } from "./components/header/header.component";
 
 export function AdminLayout() {
-  const { isAuthenticated, signOut } = useAuthentication()
+  const { isAuthenticated } = useAuthentication()
 
   useEffect(() => {
     if (!isAuthenticated) {
@@ -13,30 +16,17 @@ export function AdminLayout() {
   }, [isAuthenticated])
 
   return (
-    <AuthGuard>
-      <header>
-        <Link to="/">
-          Home
-        </Link>
+    <SidebarProvider>
+      <AuthGuard>
+      <AsideMenu />
 
-        <div>
-          <button type="button" onClick={signOut}>Logout</button>
-        </div>
-      </header>
-
-      <aside>
-        <ul>
-          <li>
-            <Link to='/exam-applications'>
-              Exams
-            </Link>
-          </li>
-        </ul>
-      </aside>
-
-      <main>
-        <Outlet />
-      </main>
-    </AuthGuard>
+      <SidebarInset>
+        <Header />
+        <main className="px-4">
+          <Outlet />
+        </main>
+      </SidebarInset>
+      </AuthGuard>
+    </SidebarProvider>
   )
 }

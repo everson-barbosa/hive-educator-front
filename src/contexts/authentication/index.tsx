@@ -1,9 +1,11 @@
 import { SIGN_IN_TOKEN_STORAGE_KEY } from "../../config/storage/storage.config"
 import { createContext, ReactNode, useContext, useState } from "react"
-import { checkIfTokenIsExpired } from "../../utils/token/check-if-token-is-expired"
-import { getStoragedToken } from "../../utils/token/get-storaged-token"
 import { signInWithEmailService } from "../../services/authentication/sign-in-with-email/sign-in-with-email.service"
 import { useNavigate } from "react-router-dom"
+import { IsAuthenticathedInitializer } from "./initializers/is-authenticated/is-authenticated.initializer"
+import { UserInitializer } from "./initializers/user/user.initializer"
+import { UserPayloadSchema } from "./schemas/user-payload/user-payload.schema"
+
 
 interface SignInEmailAndPasswordProps {
   readonly email: string
@@ -11,6 +13,7 @@ interface SignInEmailAndPasswordProps {
 }
 
 interface AuthenticationContextProps {
+  readonly user: UserPayloadSchema | null
   readonly isAuthenticated: boolean
   readonly signIn: {
     readonly withEmailAndPassword: (props: SignInEmailAndPasswordProps) => void
@@ -25,12 +28,9 @@ interface AuthenticationProviderProps {
 }
 
 export function AuthenticationProvider({ children }: AuthenticationProviderProps) {
+  const [isAuthenticated, setIsAuthenticated] = useState(IsAuthenticathedInitializer())
+  const [user, setUser] = useState<UserPayloadSchema | null>(UserInitializer)
   const navigate = useNavigate()
-  const [isAuthenticated, setIsAuthenticated] = useState(() => {
-    const token = getStoragedToken()
-
-    return token ? checkIfTokenIsExpired(token) : false
-  })
 
   const signInByEmailAndPassword = async ({ email, password }: SignInEmailAndPasswordProps) => {
     try {
@@ -39,6 +39,7 @@ export function AuthenticationProvider({ children }: AuthenticationProviderProps
       sessionStorage.setItem(SIGN_IN_TOKEN_STORAGE_KEY, data.access_token)
       
       navigate('/')
+      setUser(UserInitializer())
     } catch (error) {
       console.error('Error on try sign in with email and password', error)
     }
@@ -46,14 +47,14 @@ export function AuthenticationProvider({ children }: AuthenticationProviderProps
   }
 
   const signOut = () => {
-    console.log('signOut')
-
     sessionStorage.removeItem(SIGN_IN_TOKEN_STORAGE_KEY)
     setIsAuthenticated(false)
+    setUser(null)
     navigate('/login')
   }
 
   const contextValue: AuthenticationContextProps = {
+    user,
     isAuthenticated,
     signIn: {
       withEmailAndPassword: signInByEmailAndPassword
