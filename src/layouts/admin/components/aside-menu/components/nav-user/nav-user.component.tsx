@@ -24,7 +24,7 @@ import {
   useSidebar,
 } from "@/components/ui/sidebar/sidebar.component"
 import { LogoutButton } from "./components/logout-button/logout-button.component"
-import { useAuthentication } from "@/contexts/authentication"
+import { useAuthentication } from "@/contexts/authentication/authentication.context"
 import { UserParser } from "@/utils/parsers/user"
 
 export function NavUser() {

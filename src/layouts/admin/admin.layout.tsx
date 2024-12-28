@@ -1,5 +1,5 @@
 import { SidebarInset, SidebarProvider } from "../../components/ui/sidebar/sidebar.component";
-import { useAuthentication } from "../../contexts/authentication";
+import { useAuthentication } from "../../contexts/authentication/authentication.context";
 import { AuthGuard } from "../../utils/guards/auth-guard";
 import { useEffect } from "react";
 import { Outlet } from "react-router-dom";

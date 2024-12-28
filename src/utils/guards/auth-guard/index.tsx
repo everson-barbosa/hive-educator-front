@@ -1,5 +1,5 @@
 import { ReactNode, useEffect } from "react";
-import { useAuthentication } from "../../../contexts/authentication";
+import { useAuthentication } from "../../../contexts/authentication/authentication.context";
 import { useNavigate } from "react-router-dom";
 
 interface AuthGuardProps {

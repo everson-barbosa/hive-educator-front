@@ -16,7 +16,7 @@ interface AuthenticationContextProps {
   readonly user: UserPayloadSchema | null
   readonly isAuthenticated: boolean
   readonly signIn: {
-    readonly withEmailAndPassword: (props: SignInEmailAndPasswordProps) => void
+    readonly withEmailAndPassword: (props: SignInEmailAndPasswordProps) => Promise<void>
   }
   readonly signOut: () => void 
 }
@@ -40,10 +40,12 @@ export function AuthenticationProvider({ children }: AuthenticationProviderProps
       
       navigate('/')
       setUser(UserInitializer())
+      setIsAuthenticated(true)
     } catch (error) {
       console.error('Error on try sign in with email and password', error)
+      
+      throw error
     }
-    setIsAuthenticated(true)
   }
 
   const signOut = () => {
