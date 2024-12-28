@@ -12,7 +12,7 @@ export interface SignInWithEmailServiceResponse {
 
 export function signInWithEmailService({ email, password }: SignInWithEmailServiceProps) {
   return axios.post<SignInWithEmailServiceResponse>(AUTHENTICATION_API_CONFIG.signInByEmailAndPassword, {
-      email, 
-      password
-    })
+    email, 
+    password
+  })
 }

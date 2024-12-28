@@ -20,11 +20,11 @@ export function AdminLayout() {
       <AuthGuard>
       <AsideMenu />
 
-      <SidebarInset>
+      <SidebarInset className="px-4">
         <Header />
-        <main className="px-4">
+        <div className="mt-4 px-4 max-w-7xl w-full mx-auto">
           <Outlet />
-        </main>
+        </div>
       </SidebarInset>
       </AuthGuard>
     </SidebarProvider>
