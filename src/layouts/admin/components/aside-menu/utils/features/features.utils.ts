@@ -2,7 +2,7 @@ import { BookCheckIcon } from "lucide-react";
 
 export const features = [
     {
-      title: "Exams",
+      title: "School management",
       url: "#",
       icon: BookCheckIcon,
       isActive: true,
@@ -10,10 +10,6 @@ export const features = [
         {
           title: "Exam applications",
           url: "/exam-applications",
-        },
-        {
-          title: "Exam templates",
-          url: "/exam-templates",
         },
       ],
     }

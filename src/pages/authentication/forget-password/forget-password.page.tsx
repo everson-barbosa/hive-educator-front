@@ -9,3 +9,5 @@ export function ForgetPasswordPage() {
     </form>
   )
 }
+
+export default ForgetPasswordPage

@@ -59,7 +59,7 @@ export function NavFeatures({
               <CollapsibleContent>
                 <SidebarMenuSub>
                   {feature.subFeatures?.map((subFeature) => (
-                    <SidebarMenuSubItem key={subFeature.title}>
+                    <SidebarMenuSubItem key={subFeature.title} onClick={(props) => console.log(props)}>
                       <SidebarMenuSubButton asChild>
                         <Link to={subFeature.url}>
                           <span>{subFeature.title}</span>

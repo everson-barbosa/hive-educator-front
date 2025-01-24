@@ -5,3 +5,5 @@ export function ExamApplicationDetailPage() {
     </div>
   )
 }
+
+export default ExamApplicationDetailPage

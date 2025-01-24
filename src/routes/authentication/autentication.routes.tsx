@@ -1,8 +1,10 @@
-import { LoginPage } from '../../pages/authentication/login/login.page';
-import { ForgetPasswordPage } from '../../pages/authentication/forget-password/forget-password.page';
-import { RedirectWithToken } from '../../pages/authentication/redirect-with-token/redirect-with-token.page';
+import { lazy } from 'react';
 import { Route, Routes } from 'react-router-dom';
-import { AuthenticationLayout } from '../../layouts/authentication/authentication.layout';
+import { AuthenticationLayout } from '@/layouts/authentication/authentication.layout';
+
+const LoginPage = lazy(() => import('@/pages/authentication/login/login.page'))
+const ForgetPasswordPage = lazy(() => import('@/pages/authentication/forget-password/forget-password.page'))
+const RedirectWithToken = lazy(() => import('@/pages/authentication/redirect-with-token/redirect-with-token.page'))
 
 export function AuthenticationRoutes() {
   return (

@@ -25,3 +25,5 @@ export function RedirectWithToken() {
     </div>
   )
 }
+
+export default RedirectWithToken
